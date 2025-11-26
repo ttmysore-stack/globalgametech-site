@@ -9,7 +9,7 @@
 }
 
 :root {
-  /* Hudl-Inspired Color Palette */
+  /* Inspired Color Palette */
   --color-primary: #FF6B35;
   --color-primary-dark: #E85A28;
   --color-primary-light: #FF8C61;
@@ -17,7 +17,7 @@
   --color-accent: #FFC857;
   
   /* Neutral Colors */
-  --color-bg: #0A0E27;
+  --color-bg: #FFFFFF;
   --color-bg-secondary: #131829;
   --color-bg-tertiary: #1A1F3A;
   --color-bg-card: #171C33;
