@@ -126,7 +126,7 @@ body {
    ============================================ */
 
 .scroll-section {
-  scroll-margin-top: calc(var(--header-height) + 20px);
+  scroll-margin-top: var(--header-height);
 }
 
 /* ============================================
@@ -438,7 +438,7 @@ a:hover {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: calc(var(--header-height) + 60px);
+  padding-top: calc(var(--header-height) + 20px);
   padding-bottom: var(--spacing-xl);
   position: relative;
   overflow: hidden;
@@ -1514,7 +1514,7 @@ a:hover {
   /* Hero */
   .hero {
     min-height: auto;
-    padding-top: calc(var(--header-height) + 40px);
+    padding-top: calc(var(--header-height) + 20px);
   }
 
   .dashboard-slider {
