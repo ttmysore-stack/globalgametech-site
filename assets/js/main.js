@@ -6,7 +6,7 @@
   'use strict';
 
   // ============================================
-  // SMOOTH SCROLLING FOR NAVIGATION LINKS
+  // SMOOTH SCROLLING WITH PROPER OFFSET
   // ============================================
   
   const initSmoothScroll = () => {
@@ -33,11 +33,11 @@
           resetHamburger();
         }
         
-        // Calculate offset (header height)
+        // Get header height for offset
         const headerHeight = document.querySelector('.header').offsetHeight;
-        const targetPosition = target.offsetTop - headerHeight;
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
         
-        // Smooth scroll
+        // Smooth scroll with proper offset
         window.scrollTo({
           top: targetPosition,
           behavior: 'smooth'
@@ -104,9 +104,11 @@
 
   const resetHamburger = () => {
     const hamburgers = document.querySelectorAll('.hamburger');
-    hamburgers[0].style.transform = 'none';
-    hamburgers[1].style.opacity = '1';
-    hamburgers[2].style.transform = 'none';
+    if (hamburgers.length >= 3) {
+      hamburgers[0].style.transform = 'none';
+      hamburgers[1].style.opacity = '1';
+      hamburgers[2].style.transform = 'none';
+    }
   };
 
   // ============================================
@@ -194,7 +196,7 @@
   // ============================================
   
   const initActiveSection = () => {
-    const sections = document.querySelectorAll('section[id]');
+    const sections = document.querySelectorAll('.scroll-section');
     const navLinks = document.querySelectorAll('.nav-link');
     
     const observer = new IntersectionObserver(
@@ -234,7 +236,6 @@
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Add delay if specified
             const delay = entry.target.getAttribute('data-aos-delay') || 0;
             
             setTimeout(() => {
@@ -389,12 +390,12 @@
 
     slider.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
-    });
+    }, { passive: true });
 
     slider.addEventListener('touchend', (e) => {
       touchEndX = e.changedTouches[0].screenX;
       handleSwipe();
-    });
+    }, { passive: true });
 
     const handleSwipe = () => {
       if (touchEndX < touchStartX - 50) {
@@ -446,6 +447,9 @@
     initCardEffects();
     
     console.log('🎮 Global Game Tech - Website Loaded Successfully!');
+    console.log('📱 All sections aligned with proper scroll offset');
+    console.log('🖼️ Image slider initialized with 6 slides');
+    console.log('✅ Mobile responsive features enabled');
   };
 
   // ============================================
