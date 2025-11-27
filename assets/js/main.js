@@ -1,12 +1,24 @@
 // ============================================
-// GLOBAL GAME TECH - MAIN JAVASCRIPT
+// GLOBAL GAME TECH - OPTIMIZED JAVASCRIPT
 // ============================================
 
 (function() {
   'use strict';
 
   // ============================================
-  // SMOOTH SCROLLING WITH PROPER OFFSET
+  // CONFIGURATION
+  // ============================================
+  
+  const CONFIG = {
+    headerHeight: 72,
+    mobileHeaderHeight: 68,
+    sliderAutoplayDelay: 4000,
+    sliderProgressInterval: 10,
+    scrollOffset: 0  // Zero offset for tight alignment
+  };
+
+  // ============================================
+  // SMOOTH SCROLLING WITH ZERO GAP
   // ============================================
   
   const initSmoothScroll = () => {
@@ -16,7 +28,6 @@
       link.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
         
-        // Skip if it's just "#"
         if (href === '#') return;
         
         e.preventDefault();
@@ -24,20 +35,17 @@
         const target = document.querySelector(href);
         if (!target) return;
         
-        // Close mobile menu if open
-        const nav = document.querySelector('.nav');
-        const menuToggle = document.querySelector('.mobile-menu-toggle');
-        if (nav && nav.classList.contains('active')) {
-          nav.classList.remove('active');
-          menuToggle.setAttribute('aria-expanded', 'false');
-          resetHamburger();
-        }
+        // Close mobile menu
+        closeMobileMenu();
         
-        // Get header height for offset
-        const headerHeight = document.querySelector('.header').offsetHeight;
-        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+        // Get header height dynamically
+        const header = document.querySelector('.header');
+        const headerHeight = header ? header.offsetHeight : CONFIG.headerHeight;
         
-        // Smooth scroll with proper offset
+        // Calculate position with zero gap
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+        
+        // Smooth scroll
         window.scrollTo({
           top: targetPosition,
           behavior: 'smooth'
@@ -50,7 +58,7 @@
   };
 
   // ============================================
-  // UPDATE ACTIVE NAVIGATION LINK
+  // UPDATE ACTIVE NAVIGATION
   // ============================================
   
   const updateActiveNavLink = (activeHref) => {
@@ -65,7 +73,7 @@
   };
 
   // ============================================
-  // MOBILE MENU TOGGLE
+  // MOBILE MENU
   // ============================================
   
   const initMobileMenu = () => {
@@ -85,8 +93,10 @@
         hamburgers[0].style.transform = 'rotate(45deg) translateY(10px)';
         hamburgers[1].style.opacity = '0';
         hamburgers[2].style.transform = 'rotate(-45deg) translateY(-10px)';
+        document.body.style.overflow = 'hidden';
       } else {
         resetHamburger();
+        document.body.style.overflow = '';
       }
     });
     
@@ -94,12 +104,24 @@
     document.addEventListener('click', function(e) {
       if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
         if (nav.classList.contains('active')) {
-          nav.classList.remove('active');
-          menuToggle.setAttribute('aria-expanded', 'false');
-          resetHamburger();
+          closeMobileMenu();
         }
       }
     });
+  };
+
+  const closeMobileMenu = () => {
+    const nav = document.querySelector('.nav');
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    
+    if (nav && nav.classList.contains('active')) {
+      nav.classList.remove('active');
+      if (menuToggle) {
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+      resetHamburger();
+      document.body.style.overflow = '';
+    }
   };
 
   const resetHamburger = () => {
@@ -121,17 +143,20 @@
     
     let lastScroll = 0;
     
-    window.addEventListener('scroll', () => {
+    const handleScroll = () => {
       const currentScroll = window.pageYOffset;
       
-      if (currentScroll > 100) {
+      if (currentScroll > 50) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
       }
       
       lastScroll = currentScroll;
-    });
+    };
+    
+    // Use passive listener for better performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
   };
 
   // ============================================
@@ -142,13 +167,15 @@
     const scrollBtn = document.getElementById('scrollToTop');
     if (!scrollBtn) return;
     
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 500) {
+    const handleScroll = () => {
+      if (window.pageYOffset > 400) {
         scrollBtn.classList.add('visible');
       } else {
         scrollBtn.classList.remove('visible');
       }
-    });
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
     scrollBtn.addEventListener('click', () => {
       window.scrollTo({
@@ -171,19 +198,14 @@
       question.addEventListener('click', () => {
         const isActive = item.classList.contains('active');
         
-        // Close all other FAQ items
+        // Close all FAQ items
         faqItems.forEach(otherItem => {
-          if (otherItem !== item) {
-            otherItem.classList.remove('active');
-            otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-          }
+          otherItem.classList.remove('active');
+          otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
         });
         
         // Toggle current item
-        if (isActive) {
-          item.classList.remove('active');
-          question.setAttribute('aria-expanded', 'false');
-        } else {
+        if (!isActive) {
           item.classList.add('active');
           question.setAttribute('aria-expanded', 'true');
         }
@@ -192,12 +214,14 @@
   };
 
   // ============================================
-  // ACTIVE SECTION DETECTION ON SCROLL
+  // ACTIVE SECTION DETECTION
   // ============================================
   
   const initActiveSection = () => {
-    const sections = document.querySelectorAll('.scroll-section');
+    const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
+    
+    if (!('IntersectionObserver' in window)) return;
     
     const observer = new IntersectionObserver(
       (entries) => {
@@ -217,8 +241,8 @@
         });
       },
       {
-        threshold: 0.3,
-        rootMargin: '-100px 0px -50% 0px'
+        threshold: 0.2,
+        rootMargin: '-100px 0px -60% 0px'
       }
     );
     
@@ -226,11 +250,17 @@
   };
 
   // ============================================
-  // SCROLL ANIMATIONS (AOS Alternative)
+  // SCROLL ANIMATIONS
   // ============================================
   
   const initScrollAnimations = () => {
     const animatedElements = document.querySelectorAll('[data-aos]');
+    
+    if (!('IntersectionObserver' in window)) {
+      // Fallback: show all elements immediately
+      animatedElements.forEach(el => el.classList.add('aos-animate'));
+      return;
+    }
     
     const observer = new IntersectionObserver(
       (entries) => {
@@ -256,7 +286,7 @@
   };
 
   // ============================================
-  // IMAGE SLIDER / CAROUSEL
+  // IMAGE SLIDER - OPTIMIZED
   // ============================================
 
   const initImageSlider = () => {
@@ -269,23 +299,21 @@
     const nextBtn = slider.querySelector('.slider-btn-next');
     const progressBar = slider.querySelector('.slider-progress-bar');
     
+    if (slides.length === 0) return;
+    
     let currentSlide = 0;
     let autoplayInterval;
     let progressInterval;
-    const AUTOPLAY_DELAY = 4000; // 4 seconds per slide
-    const PROGRESS_INTERVAL = 10; // Update progress every 10ms
+    let isHovered = false;
 
     // Show specific slide
     const showSlide = (index) => {
-      // Remove active class from all slides and dots
       slides.forEach(slide => slide.classList.remove('active'));
       dots.forEach(dot => dot.classList.remove('active'));
 
-      // Add active class to current slide and dot
-      slides[index].classList.add('active');
-      dots[index].classList.add('active');
+      if (slides[index]) slides[index].classList.add('active');
+      if (dots[index]) dots[index].classList.add('active');
 
-      // Reset progress bar
       if (progressBar) {
         progressBar.style.width = '0%';
       }
@@ -312,27 +340,42 @@
 
     // Progress bar animation
     const animateProgress = () => {
+      if (!progressBar) return;
+      
       let progress = 0;
-      const increment = 100 / (AUTOPLAY_DELAY / PROGRESS_INTERVAL);
+      const increment = 100 / (CONFIG.sliderAutoplayDelay / CONFIG.sliderProgressInterval);
+      
+      clearInterval(progressInterval);
       
       progressInterval = setInterval(() => {
-        progress += increment;
-        if (progressBar) {
-          progressBar.style.width = progress + '%';
+        if (isHovered) {
+          clearInterval(progressInterval);
+          return;
         }
+        
+        progress += increment;
+        progressBar.style.width = Math.min(progress, 100) + '%';
+        
         if (progress >= 100) {
           clearInterval(progressInterval);
         }
-      }, PROGRESS_INTERVAL);
+      }, CONFIG.sliderProgressInterval);
     };
 
     // Start autoplay
     const startAutoplay = () => {
+      if (isHovered) return;
+      
       animateProgress();
+      
+      clearInterval(autoplayInterval);
+      
       autoplayInterval = setInterval(() => {
-        nextSlide();
-        animateProgress();
-      }, AUTOPLAY_DELAY);
+        if (!isHovered) {
+          nextSlide();
+          animateProgress();
+        }
+      }, CONFIG.sliderAutoplayDelay);
     };
 
     // Stop autoplay
@@ -344,17 +387,12 @@
     // Reset autoplay
     const resetAutoplay = () => {
       stopAutoplay();
-      startAutoplay();
+      if (!isHovered) {
+        startAutoplay();
+      }
     };
 
-    // Event listeners for buttons
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        nextSlide();
-        resetAutoplay();
-      });
-    }
-
+    // Button event listeners
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
         prevSlide();
@@ -362,7 +400,14 @@
       });
     }
 
-    // Event listeners for dots
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetAutoplay();
+      });
+    }
+
+    // Dot event listeners
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         goToSlide(index);
@@ -370,8 +415,15 @@
     });
 
     // Pause on hover
-    slider.addEventListener('mouseenter', stopAutoplay);
-    slider.addEventListener('mouseleave', startAutoplay);
+    slider.addEventListener('mouseenter', () => {
+      isHovered = true;
+      stopAutoplay();
+    });
+
+    slider.addEventListener('mouseleave', () => {
+      isHovered = false;
+      startAutoplay();
+    });
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
@@ -384,7 +436,7 @@
       }
     });
 
-    // Touch/Swipe support for mobile
+    // Touch/Swipe support
     let touchStartX = 0;
     let touchEndX = 0;
 
@@ -398,23 +450,33 @@
     }, { passive: true });
 
     const handleSwipe = () => {
-      if (touchEndX < touchStartX - 50) {
+      const swipeThreshold = 50;
+      
+      if (touchEndX < touchStartX - swipeThreshold) {
         nextSlide();
         resetAutoplay();
-      }
-      if (touchEndX > touchStartX + 50) {
+      } else if (touchEndX > touchStartX + swipeThreshold) {
         prevSlide();
         resetAutoplay();
       }
     };
 
-    // Initialize slider
+    // Pause autoplay when page is hidden
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopAutoplay();
+      } else if (!isHovered) {
+        startAutoplay();
+      }
+    });
+
+    // Initialize
     showSlide(currentSlide);
     startAutoplay();
   };
 
   // ============================================
-  // INTERACTIVE CARD HOVER EFFECTS
+  // CARD HOVER EFFECTS
   // ============================================
   
   const initCardEffects = () => {
@@ -422,20 +484,57 @@
     
     cards.forEach(card => {
       card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-8px) scale(1.02)';
+        this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
       });
       
       card.addEventListener('mouseleave', function() {
-        this.style.transform = '';
+        this.style.transition = '';
       });
     });
   };
 
   // ============================================
-  // INITIALIZE ALL FUNCTIONS
+  // PERFORMANCE OPTIMIZATIONS
+  // ============================================
+  
+  const initPerformanceOptimizations = () => {
+    // Lazy load images
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
+              imageObserver.unobserve(img);
+            }
+          }
+        });
+      });
+      
+      document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+      });
+    }
+
+    // Preload critical images
+    const heroImage = document.querySelector('.hero .slide.active img');
+    if (heroImage && heroImage.src) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = heroImage.src;
+      document.head.appendChild(link);
+    }
+  };
+
+  // ============================================
+  // INITIALIZE ALL
   // ============================================
   
   const init = () => {
+    // Core functionality
     initSmoothScroll();
     initMobileMenu();
     initHeaderScroll();
@@ -445,11 +544,14 @@
     initScrollAnimations();
     initImageSlider();
     initCardEffects();
+    initPerformanceOptimizations();
     
-    console.log('🎮 Global Game Tech - Website Loaded Successfully!');
-    console.log('📱 All sections aligned with proper scroll offset');
-    console.log('🖼️ Image slider initialized with 6 slides');
-    console.log('✅ Mobile responsive features enabled');
+    // Log success
+    console.log('%c🎮 Global Game Tech - Website Loaded Successfully!', 'color: #FF6B35; font-size: 16px; font-weight: bold;');
+    console.log('%c✅ Zero-gap scroll alignment enabled', 'color: #4CAF50;');
+    console.log('%c🖼️ Full-size image slider initialized', 'color: #4CAF50;');
+    console.log('%c📱 Mobile responsive features active', 'color: #4CAF50;');
+    console.log('%c⚡ Performance optimizations applied', 'color: #4CAF50;');
   };
 
   // ============================================
@@ -463,27 +565,11 @@
   }
 
   // ============================================
-  // PERFORMANCE OPTIMIZATION
+  // PREVENT SCROLL RESTORATION ON RELOAD
   // ============================================
   
-  // Lazy load images (if you add more images later)
-  if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          if (img.dataset.src) {
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-            imageObserver.unobserve(img);
-          }
-        }
-      });
-    });
-    
-    document.querySelectorAll('img[data-src]').forEach(img => {
-      imageObserver.observe(img);
-    });
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
   }
 
 })();
