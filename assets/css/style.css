@@ -9,14 +9,11 @@
 }
 
 :root {
-  /* Hudl-Inspired Color Palette */
   --color-primary: #FF6B35;
   --color-primary-dark: #E85A28;
   --color-primary-light: #FF8C61;
   --color-secondary: #F7931E;
   --color-accent: #FFC857;
-  
-  /* Neutral Colors */
   --color-bg: #0A0E27;
   --color-bg-secondary: #131829;
   --color-bg-tertiary: #1A1F3A;
@@ -26,21 +23,15 @@
   --color-text-muted: #6B7A99;
   --color-border: rgba(255, 255, 255, 0.08);
   --color-border-light: rgba(255, 255, 255, 0.12);
-  
-  /* Gradients */
   --gradient-primary: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
   --gradient-dark: linear-gradient(180deg, #0A0E27 0%, #131829 100%);
   --gradient-overlay: linear-gradient(180deg, rgba(10, 14, 39, 0) 0%, rgba(10, 14, 39, 0.8) 100%);
-  
-  /* Spacing */
   --spacing-xs: 8px;
   --spacing-sm: 16px;
   --spacing-md: 24px;
   --spacing-lg: 40px;
   --spacing-xl: 64px;
   --spacing-2xl: 96px;
-  
-  /* Typography */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-size-xs: 12px;
   --font-size-sm: 14px;
@@ -53,38 +44,28 @@
   --line-height-tight: 1.2;
   --line-height-base: 1.6;
   --line-height-relaxed: 1.8;
-  
-  /* Border Radius */
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 24px;
   --radius-full: 9999px;
-  
-  /* Transitions */
   --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  /* Shadows */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
   --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
   --shadow-glow: 0 0 24px rgba(255, 107, 53, 0.3);
-  
-  /* Container */
   --container-max-width: 1200px;
-  
-  /* Header Height - CRITICAL FOR SCROLL OFFSET */
-  --header-height: 80px;
+  --header-height: 72px;
 }
 
 html {
   font-size: 16px;
   scroll-behavior: smooth;
   overflow-x: hidden;
-  scroll-padding-top: var(--header-height);
+  scroll-padding-top: 0;
 }
 
 body {
@@ -97,13 +78,11 @@ body {
   overflow-x: hidden;
 }
 
-/* Selection Style */
 ::selection {
   background: var(--color-primary);
   color: white;
 }
 
-/* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -122,10 +101,10 @@ body {
 }
 
 /* ============================================
-   SCROLL SECTION OFFSET FIX
+   CRITICAL: ZERO-GAP SCROLL FIX
    ============================================ */
 
-.scroll-section {
+section[id] {
   scroll-margin-top: var(--header-height);
 }
 
@@ -151,7 +130,6 @@ body {
   top: 0;
 }
 
-/* Focus Styles */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -160,10 +138,6 @@ select:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 4px;
 }
-
-/* ============================================
-   TYPOGRAPHY
-   ============================================ */
 
 h1, h2, h3, h4, h5, h6 {
   line-height: var(--line-height-tight);
@@ -193,10 +167,6 @@ a:hover {
   color: var(--color-primary-light);
 }
 
-/* ============================================
-   LAYOUT UTILITIES
-   ============================================ */
-
 .container {
   max-width: var(--container-max-width);
   margin: 0 auto;
@@ -204,12 +174,8 @@ a:hover {
 }
 
 .section-padding {
-  padding: var(--spacing-2xl) 0;
+  padding: 80px 0;
 }
-
-/* ============================================
-   BUTTONS
-   ============================================ */
 
 .btn {
   display: inline-flex;
@@ -290,10 +256,6 @@ a:hover {
   z-index: 1;
 }
 
-/* ============================================
-   HEADER
-   ============================================ */
-
 .header {
   position: fixed;
   top: 0;
@@ -301,7 +263,7 @@ a:hover {
   right: 0;
   height: var(--header-height);
   z-index: 1000;
-  background: rgba(10, 14, 39, 0.8);
+  background: rgba(10, 14, 39, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--color-border);
@@ -309,7 +271,7 @@ a:hover {
 }
 
 .header.scrolled {
-  background: rgba(10, 14, 39, 0.95);
+  background: rgba(10, 14, 39, 0.98);
   box-shadow: var(--shadow-md);
 }
 
@@ -323,7 +285,6 @@ a:hover {
   padding: 0 var(--spacing-md);
 }
 
-/* Brand */
 .brand {
   display: flex;
   align-items: center;
@@ -371,7 +332,6 @@ a:hover {
   background-clip: text;
 }
 
-/* Navigation */
 .nav {
   display: flex;
   gap: var(--spacing-xs);
@@ -410,7 +370,6 @@ a:hover {
   transform: scaleX(1);
 }
 
-/* Mobile Menu Toggle */
 .mobile-menu-toggle {
   display: none;
   flex-direction: column;
@@ -430,16 +389,12 @@ a:hover {
   transition: all var(--transition-base);
 }
 
-/* ============================================
-   HERO SECTION
-   ============================================ */
-
 .hero {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: calc(var(--header-height) + 20px);
-  padding-bottom: var(--spacing-xl);
+  padding-top: var(--header-height);
+  padding-bottom: 60px;
   position: relative;
   overflow: hidden;
 }
@@ -464,8 +419,8 @@ a:hover {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 480px;
-  gap: var(--spacing-xl);
+  grid-template-columns: 1fr 520px;
+  gap: 60px;
   align-items: center;
   position: relative;
   z-index: 1;
@@ -524,7 +479,6 @@ a:hover {
   flex-wrap: wrap;
 }
 
-/* Stats Row */
 .stats-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -555,18 +509,15 @@ a:hover {
   font-weight: 500;
 }
 
-/* ============================================
-   IMAGE SLIDER - FIXED VERSION
-   ============================================ */
-
 .hero-visual {
   position: relative;
+  width: 100%;
 }
 
 .dashboard-slider {
   position: relative;
   width: 100%;
-  height: 500px;
+  height: 550px;
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: var(--color-bg-tertiary);
@@ -612,7 +563,6 @@ a:hover {
   display: block;
 }
 
-/* Slider Navigation Buttons */
 .slider-btn {
   position: absolute;
   top: 50%;
@@ -651,7 +601,6 @@ a:hover {
   right: 16px;
 }
 
-/* Slider Dots */
 .slider-dots {
   position: absolute;
   bottom: 20px;
@@ -685,7 +634,6 @@ a:hover {
   border-radius: var(--radius-full);
 }
 
-/* Progress Bar */
 .slider-progress {
   position: absolute;
   bottom: 0;
@@ -703,14 +651,10 @@ a:hover {
   transition: width 0.1s linear;
 }
 
-/* ============================================
-   SECTION HEADERS
-   ============================================ */
-
 .section-header {
   text-align: center;
   max-width: 800px;
-  margin: 0 auto var(--spacing-xl);
+  margin: 0 auto 60px;
 }
 
 .section-badge {
@@ -738,10 +682,6 @@ a:hover {
   color: var(--color-text-secondary);
   line-height: var(--line-height-relaxed);
 }
-
-/* ============================================
-   SOLUTIONS SECTION
-   ============================================ */
 
 .solutions-section {
   background: var(--color-bg-secondary);
@@ -857,10 +797,6 @@ a:hover {
   font-weight: 700;
 }
 
-/* ============================================
-   SPORTS SECTION
-   ============================================ */
-
 .sports-section {
   background: var(--color-bg);
 }
@@ -947,10 +883,6 @@ a:hover {
 .custom-link:hover {
   transform: translateX(4px);
 }
-
-/* ============================================
-   CAREERS SECTION
-   ============================================ */
 
 .careers-section {
   background: var(--color-bg-secondary);
@@ -1068,10 +1000,6 @@ a:hover {
   color: var(--color-primary-light);
 }
 
-/* ============================================
-   FAQ SECTION
-   ============================================ */
-
 .faq-section {
   background: var(--color-bg);
 }
@@ -1141,10 +1069,6 @@ a:hover {
   line-height: var(--line-height-relaxed);
   margin: 0;
 }
-
-/* ============================================
-   CONTACT SECTION (2 CARDS ONLY)
-   ============================================ */
 
 .contact-section {
   background: var(--color-bg-secondary);
@@ -1219,10 +1143,6 @@ a:hover {
 .contact-item-large a.contact-value:hover {
   color: var(--color-primary);
 }
-
-/* ============================================
-   FOOTER
-   ============================================ */
 
 .footer {
   background: var(--color-bg);
@@ -1339,10 +1259,6 @@ a:hover {
   transform: translateY(-2px);
 }
 
-/* ============================================
-   SCROLL TO TOP BUTTON
-   ============================================ */
-
 .scroll-to-top {
   position: fixed;
   bottom: 30px;
@@ -1370,10 +1286,6 @@ a:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-xl), var(--shadow-glow);
 }
-
-/* ============================================
-   AOS ANIMATIONS
-   ============================================ */
 
 [data-aos] {
   opacity: 0;
@@ -1424,26 +1336,19 @@ a:hover {
   transform: translateY(0);
 }
 
-/* ============================================
-   RESPONSIVE DESIGN
-   ============================================ */
-
-/* Tablet (1024px and below) */
 @media (max-width: 1024px) {
   :root {
     --font-size-3xl: 40px;
     --font-size-4xl: 48px;
-    --spacing-xl: 48px;
-    --spacing-2xl: 72px;
   }
 
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
+    gap: 40px;
   }
 
   .dashboard-slider {
-    height: 400px;
+    height: 450px;
   }
 
   .solutions-grid {
@@ -1464,19 +1369,17 @@ a:hover {
   }
 }
 
-/* Mobile (768px and below) */
 @media (max-width: 768px) {
   :root {
     --font-size-3xl: 32px;
     --font-size-4xl: 36px;
-    --spacing-md: 20px;
-    --spacing-lg: 32px;
-    --spacing-xl: 40px;
-    --spacing-2xl: 56px;
-    --header-height: 70px;
+    --header-height: 68px;
   }
 
-  /* Header Mobile Menu */
+  section[id] {
+    scroll-margin-top: 68px;
+  }
+
   .mobile-menu-toggle {
     display: flex;
   }
@@ -1511,14 +1414,18 @@ a:hover {
     margin-top: var(--spacing-sm);
   }
 
-  /* Hero */
   .hero {
     min-height: auto;
-    padding-top: calc(var(--header-height) + 20px);
+    padding-top: 68px;
+    padding-bottom: 40px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
   }
 
   .dashboard-slider {
-    height: 300px;
+    height: 350px;
   }
 
   .stats-row {
@@ -1540,27 +1447,26 @@ a:hover {
     font-size: var(--font-size-2xl);
   }
 
-  /* Solutions */
+  .section-padding {
+    padding: 60px 0;
+  }
+
   .solutions-grid {
     grid-template-columns: 1fr;
   }
 
-  /* Sports */
   .sports-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* Careers */
   .careers-grid {
     grid-template-columns: 1fr;
   }
 
-  /* Contact */
   .contact-info-grid {
     grid-template-columns: 1fr;
   }
 
-  /* Footer */
   .footer-grid {
     grid-template-columns: 1fr;
   }
@@ -1570,7 +1476,6 @@ a:hover {
     text-align: center;
   }
 
-  /* Slider controls */
   .slider-btn {
     width: 40px;
     height: 40px;
@@ -1585,21 +1490,10 @@ a:hover {
   }
 }
 
-/* Small Mobile (480px and below) */
 @media (max-width: 480px) {
   :root {
     --font-size-3xl: 28px;
     --font-size-4xl: 32px;
-    --spacing-sm: 12px;
-    --spacing-md: 16px;
-  }
-
-  .container {
-    padding: 0 var(--spacing-sm);
-  }
-
-  .section-padding {
-    padding: var(--spacing-xl) 0;
   }
 
   .hero-cta {
@@ -1615,7 +1509,7 @@ a:hover {
   }
 
   .dashboard-slider {
-    height: 250px;
+    height: 280px;
   }
 
   .scroll-to-top {
