@@ -102,7 +102,7 @@
             <!-- Stats Row -->
             <div class="stats-row">
               <div class="stat-item">
-                <div class="stat-number">10K+</div>
+                <div class="stat-number">50K+</div>
                 <div class="stat-label">Matches Analyzed</div>
               </div>
               <div class="stat-item">
@@ -116,72 +116,57 @@
             </div>
           </div>
 
-          <!-- Dashboard Mockup -->
+          <!-- Dashboard Image Slider -->
           <div class="hero-visual" data-aos="fade-left">
-            <div class="dashboard-mockup">
-              <!-- Video Player -->
-              <div class="video-preview">
-                <div class="video-overlay">
-                  <button class="play-button" aria-label="Play demo video">
-                    <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
-                      <circle cx="25" cy="25" r="24" stroke="currentColor" stroke-width="1.5"/>
-                      <path d="M20 15L35 25L20 35V15Z" fill="currentColor"/>
-                    </svg>
-                  </button>
-                </div>
-                <div class="video-time">00:45 / 02:30</div>
-              </div>
-
-              <!-- Quick Stats -->
-              <div class="mockup-stats">
-                <div class="mockup-stat">
-                  <span class="mockup-stat-label">Events</span>
-                  <span class="mockup-stat-value">127</span>
-                </div>
-                <div class="mockup-stat">
-                  <span class="mockup-stat-label">Plays</span>
-                  <span class="mockup-stat-value">42</span>
-                </div>
-                <div class="mockup-stat">
-                  <span class="mockup-stat-label">Highlights</span>
-                  <span class="mockup-stat-value">8</span>
+            <div class="dashboard-slider">
+              <div class="slider-wrapper">
+                <div class="slider-track">
+                  <div class="slide active">
+                    <img src="assets/images/dashboard-1.jpg" alt="Analytics Dashboard Overview">
+                  </div>
+                  <div class="slide">
+                    <img src="assets/images/dashboard-2.jpg" alt="Video Tagging Interface">
+                  </div>
+                  <div class="slide">
+                    <img src="assets/images/dashboard-3.jpg" alt="Player Statistics Dashboard">
+                  </div>
+                  <div class="slide">
+                    <img src="assets/images/dashboard-4.jpg" alt="Team Performance Metrics">
+                  </div>
+                  <div class="slide">
+                    <img src="assets/images/dashboard-5.jpg" alt="Highlight Reel Editor">
+                  </div>
+                  <div class="slide">
+                    <img src="assets/images/dashboard-6.jpg" alt="Tactical Analysis Board">
+                  </div>
                 </div>
               </div>
 
-              <!-- Player Performance -->
-              <div class="player-performance">
-                <div class="player-header">
-                  <div class="player-avatar">AK</div>
-                  <div class="player-info">
-                    <h4 class="player-name">A. Kumar</h4>
-                    <p class="player-position">Forward • #12</p>
-                  </div>
-                </div>
-                <div class="player-metrics">
-                  <div class="metric">
-                    <span class="metric-label">Shots</span>
-                    <span class="metric-value">8</span>
-                  </div>
-                  <div class="metric">
-                    <span class="metric-label">Assists</span>
-                    <span class="metric-value">5</span>
-                  </div>
-                  <div class="metric">
-                    <span class="metric-label">Rebounds</span>
-                    <span class="metric-value">12</span>
-                  </div>
-                </div>
-                <div class="performance-chart">
-                  <svg width="100%" height="60" viewBox="0 0 280 60" preserveAspectRatio="none">
-                    <defs>
-                      <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:0.5" />
-                        <stop offset="100%" style="stop-color:#FF6B35;stop-opacity:0" />
-                      </linearGradient>
-                    </defs>
-                    <polyline fill="url(#chartGradient)" stroke="#FF6B35" stroke-width="2" points="0,50 40,35 80,45 120,20 160,30 200,15 240,25 280,10"/>
-                  </svg>
-                </div>
+              <!-- Slider Controls -->
+              <button class="slider-btn slider-btn-prev" aria-label="Previous slide">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button class="slider-btn slider-btn-next" aria-label="Next slide">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <!-- Slider Dots -->
+              <div class="slider-dots">
+                <button class="dot active" aria-label="Go to slide 1"></button>
+                <button class="dot" aria-label="Go to slide 2"></button>
+                <button class="dot" aria-label="Go to slide 3"></button>
+                <button class="dot" aria-label="Go to slide 4"></button>
+                <button class="dot" aria-label="Go to slide 5"></button>
+                <button class="dot" aria-label="Go to slide 6"></button>
+              </div>
+
+              <!-- Progress Bar -->
+              <div class="slider-progress">
+                <div class="slider-progress-bar"></div>
               </div>
             </div>
           </div>
@@ -219,9 +204,9 @@
             <div class="solution-icon">
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                 <path d="M8 28L15 18L22 24L32 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="15" cy="18" r="2" fill="currentColor"/>
-                <circle cx="22" cy="24" r="2" fill="currentColor"/>
-                <circle cx="32" cy="12" r="2" fill="currentColor"/>
+                ircle cx="15" cy="18" r="2" fill="currentColor"/>
+                ircle cx="22" cy="24" r="2" fill="currentColor"/>
+                ircle cx="32" cy="12" r="2" fill="currentColor"/>
               </svg>
             </div>
             <h3 class="solution-title">Full Analytics & Reports</h3>
@@ -547,97 +532,45 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact Section (No Form - Contact Info Only) -->
     <section id="contact" class="contact-section section-padding">
       <div class="container">
-        <div class="contact-grid">
-          <div class="contact-content" data-aos="fade-right">
-            <span class="section-badge">Let's Talk</span>
-            <h2 class="section-title">Ready to Scale Your Video Analysis?</h2>
-            <p class="section-description">Get in touch for a custom quote, free sample tagging, or to discuss your specific requirements.</p>
-            
-            <div class="contact-info">
-              <div class="contact-item">
-                <div class="contact-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M3 8L10.89 13.26C11.5 13.67 12.5 13.67 13.11 13.26L21 8M5 19H19C20.1 19 21 18.1 21 17V7C21 5.9 20.1 5 19 5H5C3.9 5 3 5.9 3 7V17C3 18.1 3.9 19 5 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <h4>Email</h4>
-                  <a href="mailto:info@globalgametech.com">info@globalgametech.com</a>
-                </div>
-              </div>
-
-              <div class="contact-item">
-                <div class="contact-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M3 5C3 3.9 3.9 3 5 3H8.5C9.25 3 9.91 3.5 10.13 4.23L11.72 9.3C11.89 9.83 11.74 10.42 11.34 10.82L9.24 12.92C10.58 15.58 12.42 17.42 15.08 18.76L17.18 16.66C17.58 16.26 18.17 16.11 18.7 16.28L23.77 17.87C24.5 18.09 25 18.75 25 19.5V23C25 24.1 24.1 25 23 25H20C10.61 25 3 17.39 3 8V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <h4>Phone</h4>
-                  <a href="tel:+917795631670">+91 77956 31670</a>
-                </div>
-              </div>
-
-              <div class="contact-item">
-                <div class="contact-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 5.03 7.03 1 12 1C16.97 1 21 5.03 21 10Z" stroke="currentColor" stroke-width="2"/>
-                    <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
-                  </svg>
-                </div>
-                <div>
-                  <h4>Location</h4>
-                  <p>Mysuru, Karnataka, India</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-form-wrapper" data-aos="fade-left">
-            <form class="contact-form" id="contactForm">
-              <div class="form-group">
-                <label for="name">Full Name *</label>
-                <input type="text" id="name" name="name" required placeholder="John Doe">
-              </div>
-
-              <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" required placeholder="john@company.com">
-              </div>
-
-              <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000">
-              </div>
-
-              <div class="form-group">
-                <label for="service">Service Interested In *</label>
-                <select id="service" name="service" required>
-                  <option value="">Select a service</option>
-                  <option value="video-tagging">Video Tagging</option>
-                  <option value="analytics">Full Analytics</option>
-                  <option value="tactical">Tactical Analysis</option>
-                  <option value="highlights">Highlights Creation</option>
-                  <option value="dashboard">Dashboard Delivery</option>
-                  <option value="white-label">White-Label Outsourcing</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="message">Message *</label>
-                <textarea id="message" name="message" rows="4" required placeholder="Tell us about your project..."></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-primary btn-large btn-block">
-                <span>Send Message</span>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M18 2L9 11M18 2L12 18L9 11M18 2L2 8L9 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <div class="contact-content-center" data-aos="fade-up">
+          <span class="section-badge">Let's Talk</span>
+          <h2 class="section-title">Ready to Scale Your Video Analysis?</h2>
+          <p class="section-description">Get in touch for a custom quote, free sample tagging, or to discuss your specific requirements.</p>
+          
+          <div class="contact-info-grid">
+            <div class="contact-item-large" data-aos="zoom-in" data-aos-delay="100">
+              <div class="contact-icon-large">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                  <path d="M3 8L10.89 13.26C11.5 13.67 12.5 13.67 13.11 13.26L21 8M5 19H19C20.1 19 21 18.1 21 17V7C21 5.9 20.1 5 19 5H5C3.9 5 3 5.9 3 7V17C3 18.1 3.9 19 5 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-              </button>
-            </form>
+              </div>
+              <h4 class="contact-label">Email</h4>
+              <a href="mailto:info@globalgametech.com" class="contact-value">info@globalgametech.com</a>
+            </div>
+
+            <div class="contact-item-large" data-aos="zoom-in" data-aos-delay="200">
+              <div class="contact-icon-large">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                  <path d="M22 16.92V19.92C22 20.52 21.5 21.03 20.9 21.03C9.4 20.07 2 12.67 2 1.17C2 0.57 2.5 0.07 3.1 0.07H6.1C6.7 0.07 7.2 0.57 7.2 1.17C7.2 2.37 7.4 3.53 7.8 4.63C7.9 4.93 7.8 5.23 7.6 5.43L5.9 7.13C7.6 10.53 10.5 13.43 13.9 15.13L15.6 13.43C15.8 13.23 16.1 13.13 16.4 13.23C17.5 13.63 18.7 13.83 19.9 13.83C20.5 13.83 21 14.33 21 14.93V16.93C22 16.92 22 16.92 22 16.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h4 class="contact-label">Phone</h4>
+              <a href="tel:+917795631670" class="contact-value">+91 77956 31670</a>
+            </div>
+
+            <div class="contact-item-large" data-aos="zoom-in" data-aos-delay="300">
+              <div class="contact-icon-large">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                  <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 5.03 7.03 1 12 1C16.97 1 21 5.03 21 10Z" stroke="currentColor" stroke-width="2"/>
+                  ircle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <h4 class="contact-label">Location</h4>
+              <p class="contact-value">Mysuru, Karnataka, India</p>
+            </div>
           </div>
         </div>
       </div>
